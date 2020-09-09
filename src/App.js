@@ -18,7 +18,7 @@ export default function App() {
     api.get('repositories').then(response => {
       setRepositories(response.data);
     })
-  })
+  }, []);
 
   async function handleLikeRepository(id) {
     const response = await api.post(`repositories/${id}/like`);
@@ -28,11 +28,11 @@ export default function App() {
     const repositoriesUpdated = repositories.map(repository => {
       if(repository.id === id) {
         return likedRepository;
-      } else {
-        return repository;
-      }
+      } 
+      
+      return repository;
     });
-    
+
     setRepositories(repositoriesUpdated);
   }
 
@@ -48,11 +48,11 @@ export default function App() {
               <Text style={styles.repository}>{repository.title}</Text>
 
               <View style={styles.techsContainer}>
-                  {repository.map(tech => (
-                     <Text key={tech} style={styles.tech}>
-                       {tech}
-                    </Text>
-                  ))}
+                {repository.map(tech => (
+                  <Text key={tech} style={styles.tech}>
+                    {tech}
+                  </Text>
+                ))}
               </View>
 
               <View style={styles.likesContainer}>
